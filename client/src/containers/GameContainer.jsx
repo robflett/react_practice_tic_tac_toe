@@ -18,15 +18,20 @@ class GameContainer extends React.Component {
     this.setState({ currentPlayer: nextPlayer, status: status })
   }
 
-  announceResult() {
-    const status = this.state.currentPlayer + " WINS!"
-    this.setState({ status: status })
+  announceResult(winner) {
+    if (winner) {
+      const status = winner + " WINS!"
+      this.setState({ status: status })     
+    } else {
+      this.setState({ status: "It's a draw; what a surprise." })
+    }
+
   }
 
   render( ) {
     return (
       <div className="game-container">
-        <h1>Tic Tac Toe !</h1>
+        <h1>Tic Tac Toe!</h1>
         <TicTacToeGrid nextTurn={this.nextTurn.bind(this)} currentPlayer={this.state.currentPlayer} announceResult={this.announceResult.bind(this)}/>
         <StatusView message={this.state.status} />
         

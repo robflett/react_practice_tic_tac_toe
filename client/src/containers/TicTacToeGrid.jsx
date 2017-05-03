@@ -4,6 +4,7 @@ import Cell from '../components/Cell'
 class TicTacToeGrid extends React.Component {
   constructor(props) {
     super(props)
+    this.squaresFilled = 0
     this.handleClick = this.handleClick.bind(this)
     this.state = {
       board: [
@@ -15,23 +16,31 @@ class TicTacToeGrid extends React.Component {
   }
 
   handleClick(event) {
-    // console.log(event.target.dataset.x, event.target.dataset.y)
     let board = this.state.board
     const x = event.target.dataset.x
     const y = event.target.dataset.y
     if (board[x][y] === "") {
       board[x][y] = this.props.currentPlayer
       this.setState({ board: board })
-      if (!this.gameIsOver()){
-        this.props.nextTurn()
-      } else {
+      if (this.gameHasWinner()) {
         this.handleClick = null
-        this.props.announceResult()
+        this.props.announceResult(this.props.currentPlayer)
+      } else {
+        this.squaresFilled++
+        if (this.gameIsDrawn()) {
+          this.props.announceResult(null)
+        } else {
+          this.props.nextTurn()
+        }
       }
     }
   }
 
-  gameIsOver(){
+  gameIsDrawn() {
+      return( this.squaresFilled === 9)
+  }
+
+  gameHasWinner(){
     const board = this.state.board
     const player = this.props.currentPlayer
     let gameOver = false
