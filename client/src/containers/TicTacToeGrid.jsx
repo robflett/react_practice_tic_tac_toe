@@ -25,6 +25,7 @@ class TicTacToeGrid extends React.Component {
       if (!this.gameIsOver()){
         this.props.nextTurn()
       } else {
+        this.handleClick = null
         this.props.announceResult()
       }
     }

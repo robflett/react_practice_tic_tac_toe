@@ -1,22 +1,26 @@
 import React from 'react'
 import TicTacToeGrid from "./TicTacToeGrid"
+import StatusView from '../components/StatusView'
 
 class GameContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentPlayer: "O"
+      currentPlayer: "O",
+      status: "Current Player: O"
     }
   }
 
   nextTurn() {
     // if (this.state.currentPlayer === "O") nextPlayer = "X" else nextPlayer = "O"
     const nextPlayer = (this.state.currentPlayer === "O") ? "X" : "O"
-    this.setState({ currentPlayer: nextPlayer })
+    const status = "Current Player: " + nextPlayer
+    this.setState({ currentPlayer: nextPlayer, status: status })
   }
 
   announceResult() {
-    console.log(this.state.currentPlayer + " WINS!")
+    const status = this.state.currentPlayer + " WINS!"
+    this.setState({ status: status })
   }
 
   render( ) {
@@ -24,7 +28,8 @@ class GameContainer extends React.Component {
       <div className="game-container">
         <h1>Tic Tac Toe !</h1>
         <TicTacToeGrid nextTurn={this.nextTurn.bind(this)} currentPlayer={this.state.currentPlayer} announceResult={this.announceResult.bind(this)}/>
-        <p>Current Player: {this.state.currentPlayer}</p>
+        <StatusView message={this.state.status} />
+        
       </div>
     )
   }
