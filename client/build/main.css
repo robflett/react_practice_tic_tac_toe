@@ -3,6 +3,13 @@ body {
   font-family: Helvetica;
 }
 
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .grid {
   display: flex;
   flex-direction: column;
@@ -26,5 +33,12 @@ body {
 
 .status-view {
   font-size: 1.2em;
+}
+
+button {
+  font-size: 1.2em;
+  width: 10em;
+  margin: auto;
+  margin-top: 1em;
 }
 
