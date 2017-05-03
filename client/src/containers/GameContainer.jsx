@@ -28,13 +28,20 @@ class GameContainer extends React.Component {
 
   }
 
+  restart(){
+    this.setState({
+      currentPlayer: "O",
+      status: "Current Player: O"
+    })
+    console.log("reset!")
+  }
+
   render( ) {
     return (
       <div className="game-container">
         <h1>Tic Tac Toe!</h1>
-        <TicTacToeGrid nextTurn={this.nextTurn.bind(this)} currentPlayer={this.state.currentPlayer} announceResult={this.announceResult.bind(this)}/>
+        <TicTacToeGrid nextTurn={this.nextTurn.bind(this)} currentPlayer={this.state.currentPlayer} announceResult={this.announceResult.bind(this)} restartContainer={this.restart.bind(this)}/>
         <StatusView message={this.state.status} />
-        
       </div>
     )
   }

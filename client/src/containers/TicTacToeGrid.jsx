@@ -19,20 +19,24 @@ class TicTacToeGrid extends React.Component {
     let board = this.state.board
     const x = event.target.dataset.x
     const y = event.target.dataset.y
-    if (board[x][y] === "") {
-      board[x][y] = this.props.currentPlayer
-      this.setState({ board: board })
-      if (this.gameHasWinner()) {
-        this.handleClick = null
-        this.props.announceResult(this.props.currentPlayer)
-      } else {
-        this.squaresFilled++
-        if (this.gameIsDrawn()) {
-          this.props.announceResult(null)
+
+    if (this.gameHasWinner() || this.gameIsDrawn()) {
+      return
+    } else {
+      if (board[x][y] === "") {
+        board[x][y] = this.props.currentPlayer
+        this.setState({ board: board })
+        if (this.gameHasWinner()) {
+          this.props.announceResult(this.props.currentPlayer)
         } else {
-          this.props.nextTurn()
+          this.squaresFilled++
+          if (this.gameIsDrawn()) {
+            this.props.announceResult(null)
+          } else {
+            this.props.nextTurn()
+          }
         }
-      }
+      }    
     }
   }
 
@@ -56,6 +60,17 @@ class TicTacToeGrid extends React.Component {
     return gameOver
   }
 
+
+  restart(){
+    this.setState({board:[
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+      ]})
+    this.squaresFilled = 0
+    this.props.restartContainer()
+  }
+
   render() {
     return (
       <div className="grid">
@@ -74,7 +89,9 @@ class TicTacToeGrid extends React.Component {
           <Cell status={this.state.board[2][1]} x={2} y={1} handleClick={this.handleClick} />
           <Cell status={this.state.board[2][2]} x={2} y={2} handleClick={this.handleClick} />
         </div>
+         <button onClick={this.restart.bind(this)}>Restart Game</button>
       </div>
+
     )
   }
 }
