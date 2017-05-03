@@ -8,10 +8,12 @@ class GameContainer extends React.Component {
   }
 
   render( ) {
-    <div className="game-container">
-      <h1> Tic Tac Toe !</h1>
-      <TicTacToeGrid/>
-    </div>
+    return (
+      <div className="game-container">
+        <h1>Tic Tac Toe !</h1>
+        <TicTacToeGrid/>
+      </div>
+    )
   }
 
 }

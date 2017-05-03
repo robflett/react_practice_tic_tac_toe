@@ -1,0 +1,25 @@
+body {
+  width: 100%;
+  font-family: Helvetica;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.cell {
+  border: 1px solid black;
+  height: 3em;
+  width: 3em;
+  text-align: center;
+}
+
+p {
+  vertical-align: middle;
+}
