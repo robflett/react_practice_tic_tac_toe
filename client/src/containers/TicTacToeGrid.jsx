@@ -17,10 +17,33 @@ class TicTacToeGrid extends React.Component {
   handleClick(event) {
     // console.log(event.target.dataset.x, event.target.dataset.y)
     let board = this.state.board
-    // CHECK CURRENT STATUS OF CELL FIRST
-    board[event.target.dataset.x][event.target.dataset.y] = this.props.currentPlayer
-    this.setState({ board: board })
-    this.props.nextTurn()
+    const x = event.target.dataset.x
+    const y = event.target.dataset.y
+    if (board[x][y] === "") {
+      board[x][y] = this.props.currentPlayer
+      this.setState({ board: board })
+      if (!this.gameIsOver()){
+        this.props.nextTurn()
+      } else {
+        this.props.announceResult()
+      }
+    }
+  }
+
+  gameIsOver(){
+    const board = this.state.board
+    const player = this.props.currentPlayer
+    let gameOver = false
+
+    for (let i = 0; i <= 2; i++) {
+      if (board[i][0] === player && board[i][1] === player && board[i][2] === player) gameOver = true
+      if (board[0][i] === player && board[1][i] === player && board[2][i] === player) gameOver = true
+    }
+
+    if (board[0][0] === player && board[1][1] === player && board[2][2] === player) gameOver =true
+    if (board[2][0] === player && board[1][1] === player && board[0][2] === player) gameOver = true
+
+    return gameOver
   }
 
   render() {

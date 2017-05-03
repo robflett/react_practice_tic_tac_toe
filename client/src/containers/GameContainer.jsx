@@ -15,11 +15,15 @@ class GameContainer extends React.Component {
     this.setState({ currentPlayer: nextPlayer })
   }
 
+  announceResult() {
+    console.log(this.state.currentPlayer + " WINS!")
+  }
+
   render( ) {
     return (
       <div className="game-container">
         <h1>Tic Tac Toe !</h1>
-        <TicTacToeGrid nextTurn={this.nextTurn.bind(this)} currentPlayer={this.state.currentPlayer}/>
+        <TicTacToeGrid nextTurn={this.nextTurn.bind(this)} currentPlayer={this.state.currentPlayer} announceResult={this.announceResult.bind(this)}/>
         <p>Current Player: {this.state.currentPlayer}</p>
       </div>
     )
