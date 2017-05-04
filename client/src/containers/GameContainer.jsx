@@ -33,7 +33,7 @@ class GameContainer extends React.Component {
       currentPlayer: "O",
       status: "Current Player: O"
     })
-    console.log("reset!")
+    // console.log("reset!")
   }
 
   render( ) {

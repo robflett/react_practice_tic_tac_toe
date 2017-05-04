@@ -6,5 +6,6 @@ window.onload = function(){
   ReactDOM.render(
     <GameContainer className="game-container"/>,
     document.getElementById('app')
-  );
+    
+  )
 }
